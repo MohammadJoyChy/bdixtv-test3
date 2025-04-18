@@ -1,4 +1,4 @@
-<?php
+<?m3u
 $url = "https://raw.githubusercontent.com/drmlive/sliv-live-events/refs/heads/main/sonyliv.m3u";
 
 // Initialize cURL session
