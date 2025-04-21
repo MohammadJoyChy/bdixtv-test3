@@ -1,5 +1,5 @@
 <?m3u
-$url = "https://raw.githubusercontent.com/drmlive/sliv-live-events/refs/heads/main/sonyliv.m3u";
+$url = "https://tv.onlinetvbd.com/fancode/playlist/playlist.m3u";
 
 // Initialize cURL session
 $ch = curl_init();
