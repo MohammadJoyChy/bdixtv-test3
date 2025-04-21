@@ -1,4 +1,4 @@
-<?m3u
+<?php
 $url = "https://tv.onlinetvbd.com/fancode/playlist/playlist.m3u";
 
 // Initialize cURL session
