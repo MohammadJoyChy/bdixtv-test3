@@ -14,7 +14,7 @@ $customLine = <<<EOD
 
 #EXTINF:-1 tvg-logo="https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png" group-title="𝗝𝗢𝗜𝗡 𝗢𝗨𝗥 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠", @bdixtv_official
 
-https://bdixtv.short.gy/bdixtv_official.m3u8
+https://bdixtv.short.gy/bdixtv_official
 
 
 
