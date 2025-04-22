@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://news.bajimath.com/Candy_Live/incapp.php?route=getIPTVList";
+$url = "https://raw.githubusercontent.com/byte-capsule/Toffee-Channels-Link-Headers/refs/heads/main/toffee_OTT_Navigator.m3u";
 
 
 
