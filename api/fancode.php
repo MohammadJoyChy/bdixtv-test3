@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://tv.onlinetvbd.com/fancode/playlist/playlist.m3u";
+$url = "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.m3u";
 
 
 
