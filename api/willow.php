@@ -1,54 +1,44 @@
 <?php
+// Set header so browser treats it like a playlist file
+header('Content-Type: audio/x-mpegurl');
+header('Content-Disposition: inline; filename="playlist.m3u"');
+
 // Fetch JSON from the URL using cURL
 $url = "https://raw.githubusercontent.com/drmlive/willow-live-events/refs/heads/main/willow.json";
-
-// Initialize cURL session
 $ch = curl_init();
-
-// Set cURL options
 curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return output as a string
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-
-// Execute cURL request
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 $response = curl_exec($ch);
 
-// Check for any cURL error
 if(curl_errno($ch)) {
-    echo 'cURL Error: ' . curl_error($ch);
+    echo '#EXTM3U';
+    echo "\n# Error fetching data: " . curl_error($ch);
 } else {
-    // Decode the JSON response
     $data = json_decode($response, true);
 
-    // Add #EXTM3U line at the top
-    echo "#EXTM3U\n";
+    // M3U header
+    echo "#EXTM3U\n\n";
 
-    // Add the #EXTINF tag for the general stream link (always on top)
-    echo "#EXTINF:-1 tvg-logo=\"https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png\" group-title=\"𝗝𝗢𝗜𝗡 𝗢𝗨𝗥 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠\", @bdixtv_official\n";
-    echo "https://bdixtv.short.gy/bdixtv_official\n";
-    
-    // Loop through each match
+    // Static first entry (general promo stream)
+    echo "#EXTINF:-1 tvg-logo=\"https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png\" group-title=\"𝗝𝗢𝗜𝗡 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠\", @bdixtv_official\n";
+    echo "https://bdixtv.short.gy/bdixtv_official\n\n";
+
+    // Loop through matches and print entries
     foreach ($data['matches'] as $match) {
-        // Get the first stream URL
         $stream_url = $match['playback_data']['urls'][0]['url'];
-
-        // Get the license key for the stream
         $license_key = $match['playback_data']['keys'][0] ?? '';
+        $title = $match['title'];
+        $logo = $match['cover'];
+        $id = $match['titleId'];
 
-        // Print the #EXTINF tag with match details
-        echo "#EXTINF:-1 tvg-id=\"" . $match['titleId'] . "\" tvg-logo=\"" . $match['cover'] . "\" group-title=\"Live Matches\", " . $match['title'] . "\n";
-
-        // Add #KODIPROP and #EXTVLCOPT tags for each stream
+        echo "#EXTINF:-1 tvg-id=\"$id\" tvg-logo=\"$logo\" group-title=\"Live Matches\", $title\n";
         echo "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
-        echo "#KODIPROP:inputstream.adaptive.license_key=" . $license_key . "\n";
-        echo "#EXTVLCOPT:http-origin=" . $stream_url . "\n";
-
-        // Print the stream URL
-        echo $stream_url . "\n";
-        echo "\n";
+        echo "#KODIPROP:inputstream.adaptive.license_key=$license_key\n";
+        echo "#EXTVLCOPT:http-origin=$stream_url\n";
+        echo "$stream_url\n\n";
     }
 }
 
-// Close the cURL session
 curl_close($ch);
 ?>
