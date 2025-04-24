@@ -11,7 +11,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 $response = curl_exec($ch);
 
-if(curl_errno($ch)) {
+if (curl_errno($ch)) {
     echo '#EXTM3U';
     echo "\n# Error fetching data: " . curl_error($ch);
 } else {
@@ -35,7 +35,6 @@ if(curl_errno($ch)) {
         echo "#EXTINF:-1 tvg-id=\"$id\" tvg-logo=\"$logo\" group-title=\"Live Matches\", $title\n";
         echo "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
         echo "#KODIPROP:inputstream.adaptive.license_key=$license_key\n";
-        echo "#EXTVLCOPT:http-origin=$stream_url\n";
         echo "$stream_url\n\n";
     }
 }
