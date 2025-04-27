@@ -5,6 +5,9 @@ $ch = curl_init();
 // Set the URL to fetch
 curl_setopt($ch, CURLOPT_URL, "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList");
 
+// Set the Referer header to simulate a request from tv-shihab.xyz
+curl_setopt($ch, CURLOPT_REFERER, "https://tv-shihab.xyz/");
+
 // Return the transfer as a string instead of outputting it directly
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
