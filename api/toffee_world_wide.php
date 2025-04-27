@@ -1,27 +1,73 @@
 <?php
-// Initialize cURL session
+
+
+
+// Main playlist URL
+
+$url = "https://raw.githubusercontent.com/byte-capsule/Toffee-Channels-Link-Headers/refs/heads/main/toffee_OTT_Navigator.m3u";
+
+
+
+// Custom channel line (should always appear at the top)
+
+$customLine = <<<EOD
+
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png" group-title="𝗝𝗢𝗜𝗡 𝗢𝗨𝗥 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠", @bdixtv_official
+
+https://bdixtv.short.gy/bdixtv_official
+
+
+
+EOD;
+
+
+
+// Fetch the playlist using cURL
+
 $ch = curl_init();
 
-// Set the URL to fetch
-curl_setopt($ch, CURLOPT_URL, "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList");
+curl_setopt($ch, CURLOPT_URL, $url);
 
-// Set the Referer header to simulate a request from tv-shihab.xyz
-curl_setopt($ch, CURLOPT_REFERER, "https://tv-shihab.xyz/");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-// Return the transfer as a string instead of outputting it directly
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-// Execute the cURL session and store the result in a variable
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+
+
 $response = curl_exec($ch);
 
-// Check if any error occurred
-if ($response === false) {
-    echo "cURL Error: " . curl_error($ch);
+
+
+if (curl_errno($ch)) {
+
+    echo 'cURL Error: ' . curl_error($ch);
+
 } else {
-    // Print the page source (the response from the URL)
-    echo $response;
+
+    // Remove any existing instance of the custom channel if already present
+
+    $response = preg_replace('/#EXTINF:-1.*?@bdixtv_official.*?\nhttps?:\/\/.*?\.m3u8\n?/s', '', $response);
+
+
+
+    // Prepend the custom channel at the very top of the playlist
+
+    $finalPlaylist = $customLine . "\n" . ltrim($response);
+
+
+
+    // Output the playlist with correct header
+
+    header("Content-Type: audio/x-mpegurl");
+
+    echo $finalPlaylist;
+
 }
 
-// Close the cURL session
+
+
 curl_close($ch);
+
 ?>
