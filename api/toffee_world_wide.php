@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://host.mafiatv.live/toffee/kaya_app.php?route=getIPTVList";
+$url = "https://tv.bdixtv24.co/toffee/rriptv_app.php?route=getIPTVList";
 
 
 
