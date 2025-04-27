@@ -1,45 +1,24 @@
 <?php
-// Target URL
-$url = "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList";
-
 // Initialize cURL session
 $ch = curl_init();
 
-// Set cURL options
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Optional, for HTTPS
+// Set the URL to fetch
+curl_setopt($ch, CURLOPT_URL, "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList");
 
-// Set custom headers
-$headers = [
-    "Referer: https://super.footcric.xyz/Toffeelive/"
-];
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+// Return the transfer as a string instead of outputting it directly
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-// Optional: User-Agent
-curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0");
-
-// Execute the request
+// Execute the cURL session and store the result in a variable
 $response = curl_exec($ch);
 
-// Check for errors
-if (curl_errno($ch)) {
+// Check if any error occurred
+if ($response === false) {
     echo "cURL Error: " . curl_error($ch);
-    exit;
+} else {
+    // Print the page source (the response from the URL)
+    echo $response;
 }
 
-// Close cURL
+// Close the cURL session
 curl_close($ch);
-
-// Now modify .m3u8 URLs by appending |Referer=...
-$response = preg_replace_callback(
-    '/https?:\/\/[^\s\'"]+\.m3u8/',
-    function ($matches) {
-        return $matches[0] . '|Referer=https://super.footcric.xyz/Toffeelive/';
-    },
-    $response
-);
-
-// Output the modified content
-echo $response;
 ?>
