@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://raw.githubusercontent.com/byte-capsule/Toffee-Channels-Link-Headers/refs/heads/main/toffee_OTT_Navigator.m3u";
+$url = "https://host.mafiatv.live/toffee/kaya_app.php?route=getIPTVList";
 
 
 
