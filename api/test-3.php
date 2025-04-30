@@ -1,7 +1,7 @@
 <?php
 
 // The target URL
-$url = "https://host.mafiatv.live/toffee/kaya_app.php?route=getIPTVList";
+$url = "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList|Referer=https://tv-shihab.xyz/";
 
 // Initialize cURL session
 $ch = curl_init();
