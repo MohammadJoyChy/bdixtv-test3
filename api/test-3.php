@@ -64,7 +64,7 @@ if (empty($id)) {
         fclose($fp);
     } else {
         session_write_close(); // Unlock the session data
-        $url_for_domain = "http://starshare.org:80/live/love95/love95/{$id}.ts";
+        $url_for_domain = "http://starshare.org:80/live/love95/love95/{$id}.m3u8";
         $domain = extractDomain($url_for_domain, $headers);
 
         if ($domain) {
