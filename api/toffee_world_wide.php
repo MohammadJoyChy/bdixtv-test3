@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://noob-cricfy.iptvbd.online/toffee-ww.m3u";
+$url = "https://tv.bdixtv24.com/toffee/rriptv_app.php?route=getIPTVList";
 
 
 
