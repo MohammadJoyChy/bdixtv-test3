@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://tv.bdixtv24.com/toffee/rriptv_app.php?route=getIPTVList";
+$url = "http://tv.bdixtv24.com/toffee/rriptv_app.php?route=getIPTVList";
 
 
 
