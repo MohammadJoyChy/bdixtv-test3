@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/(.*)\\.m3u",
-      "destination": "/api/$1.php"
-    }
-  ]
-}
