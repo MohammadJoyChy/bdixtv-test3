@@ -14,7 +14,7 @@
       },
       {
         "src": "/(.*)\\.m3u8",
-        "dest": "/api/index.php?id=$1",
+        "dest": "/api/index.php?id=$id",
         "headers": {
           "Cache-Control": "max-age=20, public"
         }
